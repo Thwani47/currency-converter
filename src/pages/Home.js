@@ -27,7 +27,6 @@ const columns = [
 
 export default function Home() {
 	const [ exchangeRates, setExchangeRates ] = useState([]);
-	const [ plotData, setPlotData ] = useState([ {} ]);
 	const [ timeRemaining, setTimeRemaining ] = useState(0);
 	const [ toCurrency, setToCurrency ] = useState('USD');
 	const [ loading, setLoading ] = useState(false);
@@ -37,7 +36,7 @@ export default function Home() {
 	useEffect(() => {
 		let interval = setInterval(() => {
 			setTimeRemaining((prevTime) => {
-				if (prevTime == 120) {
+				if (prevTime === 300) {
 					fetchData();
 					return 0;
 				}
@@ -50,8 +49,7 @@ export default function Home() {
 	}, []);
 
 	const showTimeRemaining = () => {
-		//const updateSecs = 54000;
-		const updateSecs = 120 - timeRemaining;
+		const updateSecs = 300 - timeRemaining;
 		let timeString = `${(updateSecs / 60) | 0}:${updateSecs % 60}`;
 		return `${timeString} until next update`;
 	};
